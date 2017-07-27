@@ -19,7 +19,7 @@ public:
 	virtual Point getPosition() { return position; }
 	virtual int getNo() { return no; }
 	virtual void print() { cout << no; }
-	virtual ~Shape();
+	virtual ~Shape() {}
 };
 
 #endif
