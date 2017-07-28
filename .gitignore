@@ -1,5 +1,6 @@
 bin/
 obj/
+*.rar
 *.exe
 *.cbp
 *.depend
