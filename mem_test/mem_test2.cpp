@@ -1,4 +1,5 @@
 #include <iostream>
+#include <malloc.h>
 using namespace std;
 
 class Fruit{
@@ -17,24 +18,40 @@ class Apple: public Fruit{
    char type;
 public:
    Apple() { cout << "Apple constructor" << endl; }
-   Apple() { cout << "Apple destructor" << endl; }
+   ~Apple() { cout << "Apple destructor" << endl; }
    void save() {   }
    virtual void process(){   }
-   Apple& operator new(size_t size) {
+   void* operator new(size_t size) {
+      Apple* pa = (Apple*) malloc(size);
       cout << "new apple" << endl;
+      return pa;
    }
-   Apple& operator delete() {
+   void operator delete(void* pdead, size_t size) {
       cout << "delete apple" << endl;
+      free(pdead);
    }
 };
 
 int main() {
-	Fruit f;
-	Apple a;
-	cout << "int" << sizeof(int) << endl;
-	cout << "double" << sizeof(double) << endl;
-	cout << "char" << sizeof(char) << endl;
-	cout << "method" << sizeof(&a.process) << endl;
-	cout << sizeof(f) << endl;		// 32
-	cout << sizeof(a) << endl;		// 40
+	//Fruit f;
+	//Apple a;
+
+   Fruit *pf = new Apple();
+   delete pf;
 }
+
+/*
+Fruit constructor
+Fruit constructor
+Apple constructor
+Apple destructor
+Fruit destructor
+Fruit destructor
+*/
+
+/*
+new apple
+Fruit constructor
+Apple constructor
+Fruit destructor
+*/
