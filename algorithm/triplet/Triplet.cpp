@@ -14,6 +14,10 @@ Status Put(Triplet &T, int i, ElemType e);
 Status IsAscending(Triplet T);
 // 是否按降序排列
 Status IsDescending(Triplet T);
+// 用e返回T的三个元素中最大的值
+Status Max(Triplet &T, ElemType e);
+// 用e返回T的三个元素中最小的值
+Status Min(Triplet T, ElemType &e);
 
 // template<typename T>
 // class Triplet {
