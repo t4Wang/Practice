@@ -1,4 +1,4 @@
-/* 
+/*
  * 在大小为N的集合里查找第k个大的数
  *
  * 思路：建立k大小的集合，排序，
@@ -8,14 +8,23 @@
  *
  * detail：集合为数组，
  */
+#include <iostream>
+using namespace std;
+
+void sort(int a[], int b[], int k);
+void sort(int a[], int size);
+void merge(int a1[], int size1, int a2[], int size2);
+void insert(int b[], int size, int a);
+void array_assign(int a[], int b[], int k);
+
 int main() {
 	int a[] = {1,2,3,4,5,6,7,8,9,0};
 	int b[5];
 	int k = 5;
 	int n = 10;
-	
+
 	// 1.排序出k大小的数组b
-	sort(a, n, k);
+	sort(a, b, k);
 	// 2.将a数组排序后k位置后的数比对k位置的数
 	// 比较大小
 	for (int i = k; i < n; i++) {
@@ -45,10 +54,41 @@ void sort(int a[], int size) {
 	// 如果长度为2，排序
 	// 归并排序，
 	// 拆分到基本情况后合并
-	if (size > 2) {
-		if (a[i]
+	int a1[size / 2] = a;
+	int a2[size - size / 2] = a + size / 2;
+	if (size > 1) {
+		sort(a1, size / 2);
+		sort(a2, size - size / 2);
 	}
-	
+	merge(a1, size / 2, a2, size - size / 2);
+}
+
+void merge(int a1[], size1, int a2[], size2) {
+    int size = size1 + size2
+    int b[size];
+    int i = 0, j = 0, k = 0;
+    for (; k < size && i < size1 && j < size2; k++) {
+        if (a1[i] > a2[j]) {
+            b[k] = a1[i];
+            i++;
+        } else {
+            b[k] = a2[j];
+            j++;
+        }
+    }
+    if (k != size) {
+        while (i < size1) {
+            b[k] = a1[i];
+            i++;
+            k++;
+        }
+        while (j < size2) {
+            b[k] = a2[j];
+            j++;
+            k++;
+        }
+    }
+
 }
 // 将元素插入倒序排列的数组，多余的元素忽略
 void insert(int b[], int size, int a) {
